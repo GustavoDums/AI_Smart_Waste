@@ -1,0 +1,2 @@
+"""AI Smart Waste package."""
+

@@ -1,0 +1,11 @@
+flowchart LR
+    A[Imagem do residuo] --> B[Leitura e redimensionamento 224x224]
+    B --> C[Normalizacao e data augmentation]
+    C --> D[MobileNetV2 pre-treinada]
+    D --> E[Camadas densas do classificador]
+    E --> F{Vidro quebrado?}
+    F -->|Sim| G[Alerta de risco]
+    F -->|Nao| H[Resíduo seguro]
+    E --> I[Metricas]
+    I --> J[Matriz de confusao]
+    I --> K[Precision, recall e F1]
