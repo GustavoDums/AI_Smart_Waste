@@ -139,4 +139,4 @@ A avaliacao gera matriz de confusao e relatorio com precision, recall e F1-score
 
 ## Evolucao com deteccao por caixas
 
-Se voces quiserem marcar exatamente onde esta o vidro quebrado, o proximo passo e treinar um detector YOLO com imagens anotadas por bounding boxes. Para a entrega atual, o classificador binario e mais rapido de treinar e suficiente para demonstrar inferencia de maquina substituindo a decisao humana.
+Para marcar exatamente onde esta o vidro quebrado, o proximo passo é treinar um detector YOLO com imagens anotadas por bounding boxes. Para a entrega atual da trilha que escolhemos, o classificador binario é mais rapido de treinar e suficiente para demonstrar inferencia de maquina substituindo a decisao humana, e fazer uma boa demonstração da ideia principal do projeto.
