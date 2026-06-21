@@ -59,6 +59,7 @@ Use imagens variadas:
 - cacos transparentes, verdes e marrons;
 - residuos parecidos com vidro, como plastico transparente, metal brilhante e papel laminado;
 - imagens com diferentes iluminacoes, distancias e fundos.
+- Quanto mais imagens melhor, no modelo que treinei utilizei um dataset com mais ou menos 8 mil imagens
 
 ## Instalar
 
