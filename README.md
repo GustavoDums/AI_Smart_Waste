@@ -66,10 +66,20 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+## Preparar divisao balanceada
+
+Se as imagens ja estiverem em `data/raw`, gere uma divisao nova em `data/processed`:
+
+```bash
+python -m smart_waste.prepare_dataset --source-dir data/raw --output-dir data/processed --overwrite
+```
+
+Isso preserva o dataset original e cria uma divisao aproximada de 70% treino, 15% validacao e 15% teste.
+
 ## Treinar
 
 ```bash
-python -m smart_waste.train --data-dir data/raw --epochs 10
+python -m smart_waste.train --data-dir data/processed --epochs 10
 ```
 
 O treino gera:
@@ -81,7 +91,7 @@ O treino gera:
 ## Avaliar
 
 ```bash
-python -m smart_waste.evaluate --data-dir data/raw
+python -m smart_waste.evaluate --data-dir data/processed
 ```
 
 A avaliacao gera:
@@ -93,11 +103,19 @@ Esses arquivos ajudam diretamente nos criterios de resiliencia, falsos positivos
 
 ## Rodar demo
 
-```bash
-streamlit run app.py
+No terminal do VS Code, dentro da pasta do projeto, rode:
+
+```powershell
+.\.venv\Scripts\python -m streamlit run app.py --server.port 8501
 ```
 
-Abra a URL exibida no terminal e envie uma imagem de residuo.
+Depois abra no navegador:
+
+```text
+http://localhost:8501
+```
+
+Envie uma imagem de residuo para ver a decisao de seguranca, o score de vidro quebrado e as probabilidades do modelo.
 
 ## Inferencia por terminal
 
@@ -117,7 +135,7 @@ O modelo usa transfer learning com MobileNetV2 pre-treinada em ImageNet. A base 
 
 ### Resiliencia e falsos positivos
 
-A avaliacao gera matriz de confusao e relatorio com precision, recall e F1-score. Para este problema, falso negativo e mais grave: dizer que uma imagem e segura quando existe vidro quebrado. Por isso, a demo usa um limiar configuravel para disparar alerta de risco.
+A avaliacao gera matriz de confusao e relatorio com precision, recall e F1-score. Para este problema, falso negativo e mais grave: dizer que uma imagem e segura quando existe vidro quebrado. Por isso, a demo usa um limiar configuravel para disparar alerta de risco. O valor padrao e `0.30`, favorecendo recall para `broken_glass`.
 
 ## Evolucao com deteccao por caixas
 
