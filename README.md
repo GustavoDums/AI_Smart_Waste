@@ -1,4 +1,4 @@
-# AI Smart Waste
+# AI Smart Waste Glass Detector
 
 Projeto da Trilha 1 do Demoday: um sistema de visao computacional para analisar imagens de residuos e detectar risco de vidro quebrado no meio do lixo.
 
