@@ -36,6 +36,8 @@ Arquivo do diagrama: [docs/architecture.mmd](docs/architecture.mmd)
 
 ## Estrutura do dataset
 
+As imagens usadas no treino nao estao no GitHub porque o dataset e pesado demais para versionamento comum. Quem for rodar ou treinar o projeto precisa montar o proprio dataset localmente seguindo a estrutura abaixo.
+
 Coloque as imagens nesta estrutura:
 
 ```text
@@ -141,9 +143,9 @@ A avaliacao gera matriz de confusao e relatorio com precision, recall e F1-score
 
 Para marcar exatamente onde esta o vidro quebrado, o proximo passo e treinar um detector YOLO com imagens anotadas por bounding boxes. Para a entrega atual da trilha que escolhemos, o classificador binario e mais rapido de treinar e suficiente para demonstrar inferencia de maquina substituindo a decisao humana, alem de permitir uma boa demonstracao da ideia principal do projeto.
 
-## Dataset externo e citacao
+## Datasets externos e citacao
 
-Parte das imagens pode ser complementada com dataset externo do Roboflow Universe, respeitando a licenca CC BY 4.0. Caso esse dataset seja usado na entrega, cite-o assim:
+Parte das imagens foi complementada com datasets externos do Roboflow Universe, respeitando as respectivas licencas. Como os arquivos de imagem sao pesados, eles nao sao versionados neste repositorio; apenas o codigo, o modelo treinado e a documentacao ficam no GitHub.
 
 ```bibtex
 @misc{ trash-dataset_fin-tcyh6_dataset,
@@ -156,6 +158,32 @@ Parte das imagens pode ser complementada com dataset externo do Roboflow Univers
   publisher = { Roboflow },
   year = { 2026 },
   month = { jun },
+  note = { visited on 2026-06-21 },
+}
+
+@misc{ broken-glass-1av0b_dataset,
+  title = { broken glass Dataset },
+  type = { Open Source Dataset },
+  author = { dina ibrahim },
+  howpublished = { \url{ https://universe.roboflow.com/dina-ibrahim-ayq5i/broken-glass-1av0b } },
+  url = { https://universe.roboflow.com/dina-ibrahim-ayq5i/broken-glass-1av0b },
+  journal = { Roboflow Universe },
+  publisher = { Roboflow },
+  year = { 2025 },
+  month = { dec },
+  note = { visited on 2026-06-21 },
+}
+
+@misc{ organico-kkbed_dataset,
+  title = { organico Dataset },
+  type = { Open Source Dataset },
+  author = { seba },
+  howpublished = { \url{ https://universe.roboflow.com/seba-djj84/organico-kkbed } },
+  url = { https://universe.roboflow.com/seba-djj84/organico-kkbed },
+  journal = { Roboflow Universe },
+  publisher = { Roboflow },
+  year = { 2025 },
+  month = { jul },
   note = { visited on 2026-06-21 },
 }
 ```
