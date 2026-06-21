@@ -79,7 +79,7 @@ Isso preserva o dataset original e cria uma divisao aproximada de 70% treino, 15
 ## Treinar
 
 ```bash
-python -m smart_waste.train --data-dir data/processed --epochs 10
+python -m smart_waste.train --data-dir data/processed --epochs 25
 ```
 
 O treino gera:
@@ -135,8 +135,27 @@ O modelo usa transfer learning com MobileNetV2 pre-treinada em ImageNet. A base 
 
 ### Resiliencia e falsos positivos
 
-A avaliacao gera matriz de confusao e relatorio com precision, recall e F1-score. Para este problema, falso negativo e mais grave: dizer que uma imagem e segura quando existe vidro quebrado. Por isso, a demo usa um limiar configuravel para disparar alerta de risco. O valor padrao e `0.30`, favorecendo recall para `broken_glass`.
+A avaliacao gera matriz de confusao e relatorio com precision, recall e F1-score. Para este problema, falso negativo e mais grave: dizer que uma imagem e segura quando existe vidro quebrado. Por isso, a demo usa um limiar configuravel para disparar alerta de risco. O valor padrao e `0.40`, equilibrando recall de `broken_glass` com reducao de falsos positivos.
 
 ## Evolucao com deteccao por caixas
 
-Para marcar exatamente onde esta o vidro quebrado, o proximo passo é treinar um detector YOLO com imagens anotadas por bounding boxes. Para a entrega atual da trilha que escolhemos, o classificador binario é mais rapido de treinar e suficiente para demonstrar inferencia de maquina substituindo a decisao humana, e fazer uma boa demonstração da ideia principal do projeto.
+Para marcar exatamente onde esta o vidro quebrado, o proximo passo e treinar um detector YOLO com imagens anotadas por bounding boxes. Para a entrega atual da trilha que escolhemos, o classificador binario e mais rapido de treinar e suficiente para demonstrar inferencia de maquina substituindo a decisao humana, alem de permitir uma boa demonstracao da ideia principal do projeto.
+
+## Dataset externo e citacao
+
+Parte das imagens pode ser complementada com dataset externo do Roboflow Universe, respeitando a licenca CC BY 4.0. Caso esse dataset seja usado na entrega, cite-o assim:
+
+```bibtex
+@misc{ trash-dataset_fin-tcyh6_dataset,
+  title = { Trash Dataset_fin Dataset },
+  type = { Open Source Dataset },
+  author = { New Workspace },
+  howpublished = { \url{ https://universe.roboflow.com/gustavo-dums/trash-dataset_fin-tcyh6 } },
+  url = { https://universe.roboflow.com/gustavo-dums/trash-dataset_fin-tcyh6 },
+  journal = { Roboflow Universe },
+  publisher = { Roboflow },
+  year = { 2026 },
+  month = { jun },
+  note = { visited on 2026-06-21 },
+}
+```

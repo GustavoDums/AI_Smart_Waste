@@ -18,6 +18,9 @@ from smart_waste.data import load_split, optimize, save_labels
 from smart_waste.model import build_model
 
 
+IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
+
+
 def parse_args() -> argparse.Namespace:
     """Le argumentos enviados pelo terminal.
     Exemplo:
@@ -29,6 +32,32 @@ def parse_args() -> argparse.Namespace:
     # Quantas vezes o modelo passa pelo dataset de treino inteiro.
     parser.add_argument("--epochs", type=int, default=10)
     return parser.parse_args()
+
+
+def compute_class_weights(data_dir: Path, class_names: list[str]) -> dict[int, float]:
+    """Calcula pesos para compensar classes desbalanceadas.
+
+    Quando uma classe tem muito mais imagens que outra, o modelo pode aprender
+    a favorecer a classe majoritaria. O class_weight aumenta a importancia dos
+    erros na classe menor durante o treino.
+    """
+    counts = []
+    for class_name in class_names:
+        class_dir = data_dir / "train" / class_name
+        count = sum(
+            1
+            for path in class_dir.iterdir()
+            if path.is_file() and path.suffix.lower() in IMAGE_EXTENSIONS
+        )
+        counts.append(count)
+
+    total = sum(counts)
+    num_classes = len(class_names)
+    return {
+        index: total / (num_classes * count)
+        for index, count in enumerate(counts)
+        if count > 0
+    }
 
 
 def main() -> None:
@@ -46,6 +75,7 @@ def main() -> None:
     # Salvamos essa ordem para usar depois em predict.py e evaluate.py.
     class_names = train_ds.class_names
     save_labels(class_names, LABELS_PATH)
+    class_weights = compute_class_weights(args.data_dir, class_names)
 
     # Cria a arquitetura da rede neural.
     model = build_model(num_classes=len(class_names))
@@ -70,6 +100,7 @@ def main() -> None:
         validation_data=optimize(val_ds),
         epochs=args.epochs,
         callbacks=callbacks,
+        class_weight=class_weights,
     )
 
     # Salva o historico de metricas por epoca para analise posterior.

@@ -65,7 +65,7 @@ def preprocess_image(image_input: str | Path | bytes) -> np.ndarray:
     return np.expand_dims(array, axis=0)
 
 
-def predict_image(model, labels: list[str], image_input: str | Path | bytes, threshold: float = 0.30) -> dict:
+def predict_image(model, labels: list[str], image_input: str | Path | bytes, threshold: float = 0.40) -> dict:
     """Executa predicao em uma imagem e calcula a decisao de seguranca.
 
     Args:
@@ -115,7 +115,7 @@ def parse_args() -> argparse.Namespace:
     # Caminho da imagem a ser analisada.
     parser.add_argument("image", type=Path)
     # Limiar configuravel para estudar tradeoff entre falso positivo/negativo.
-    parser.add_argument("--threshold", type=float, default=0.30)
+    parser.add_argument("--threshold", type=float, default=0.40)
     return parser.parse_args()
 
 

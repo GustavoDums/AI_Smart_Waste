@@ -33,7 +33,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--threshold",
         type=float,
-        default=0.30,
+        default=0.40,
         help="Broken-glass alert threshold. Lower values reduce false negatives.",
     )
     return parser.parse_args()

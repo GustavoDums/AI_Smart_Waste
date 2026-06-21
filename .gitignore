@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 .streamlit/
 
+data/raw/
 data/processed/
 artifacts/
 reports/

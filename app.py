@@ -37,7 +37,7 @@ threshold = st.slider(
     "Limiar para alerta de vidro quebrado",
     min_value=0.10,
     max_value=0.95,
-    value=0.30,
+    value=0.40,
     step=0.05,
 )
 
